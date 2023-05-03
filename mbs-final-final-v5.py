@@ -8,16 +8,17 @@ import sys
 
 import matplotlib.pyplot as plt
 
-def mandelbrot(h, w, x=-0.5, y=0, z=1, mi=100):
-    xw = 1.5
-    yh = 1.5*h/w
-    x_from = x - xw/z
-    x_to = x + xw/z
-    y_from = y - yh/z
-    y_to = y + yh/z
-    x = np.linspace(x_from, x_to, w).reshape((1, w))
-    y = np.linspace(y_from, y_to, h).reshape((h, 1))
-    c = x + 1j * y
+def mandelbrot(height, width, x_center=-0.5, y_center=0, zoom=1, mi=100):
+    x_width = 1.5
+    y_height = 1.5 * height / width
+    x_from = x_center - x_width / zoom
+    x_to = x_center + x_width / zoom
+    y_from = y_center - y_height / zoom
+    y_to = y_center + y_height / zoom
+
+    x_coords = np.linspace(x_from, x_to, width).reshape((1, width))
+    y_coords = np.linspace(y_from, y_to, height).reshape((height, 1))
+    c = x_coords + 1j * y_coords
     z = np.zeros(c.shape, dtype=np.complex128)
     t = np.zeros(z.shape, dtype=int)
     m = np.full(c.shape, True, dtype=bool)
