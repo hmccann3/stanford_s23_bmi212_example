@@ -9,6 +9,7 @@ import sys
 import matplotlib.pyplot as plt
 
 def mandelbrot(h, w, x=-0.5, y=0, z=1, mi=100):
+    "Description: Generates Mandelbrot set, takes height and width as inputs"
     xw = 1.5
     yh = 1.5*h/w
     x_from = x - xw/z
@@ -32,10 +33,12 @@ try:
  a1 = sys.argv[1]
  a2 = sys.argv[2]
 except* IndexError:
- print('you need args')
+ print('Please input height and width as integer arguments')
  sys.exit(1)
 
-plt.imsave('out.jpg', mandelbrot(int(sys.argv[1]), int(sys.argv[2])), cmap='magma')
-m = mahotas.imread('out.jpg')
+out_name = f"mandelbrot_{int(sys.argv[1])}_by_{int(sys.argv[2])}"
+
+plt.imsave(f"{out_name}.jpg", mandelbrot(int(sys.argv[1]), int(sys.argv[2])), cmap='magma')
+m = mahotas.imread(f"{out_name}.jpg")
 pylab.imshow(m)
 pylab.show()
